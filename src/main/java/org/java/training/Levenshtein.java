@@ -13,6 +13,19 @@ import java.util.Objects;
 public class Levenshtein {
 
     /**
+     * Main entry point that can be used to test and demonstrate the values
+     * created for the distance between pairs of strings
+     *
+     * @param args the command line arguments (unused)
+     */
+    public static void main(String[] args) {
+        System.out.println(lev("kitten", "sitting"));
+        System.out.println(lev("flaw", "lawn"));
+        System.out.println(lev("gumbo", "gambol"));
+        System.out.println(lev("ROBERTMELANSON", "ROBERTOMELANSON"));
+    }
+
+    /**
      * Utility method to return the minimum of three integers
      *
      * @param i0 The first integer
@@ -20,7 +33,7 @@ public class Levenshtein {
      * @param i2 The third integer
      * @return The minimum of the three parameters
      */
-    static int min3(int i0, int i1, int i2) {
+    private static int min3(int i0, int i1, int i2) {
         return Math.min(i0, Math.min(i1, i2));
     }
 
@@ -83,16 +96,5 @@ public class Levenshtein {
         return v1[t.length];
     }
 
-    /**
-     * Main entry point that can be used to test and demonstrate the values
-     * created for the distance between pairs of strings
-     *
-     * @param args the command line arguments (unused)
-     */
-    public static void main(String[] args) {
-        System.out.println(lev("kitten", "sitting"));
-        System.out.println(lev("flaw", "lawn"));
-        System.out.println(lev("gumbo", "gambol"));
-        System.out.println(lev("ROBERTMELANSON", "ROBERTOMELANSON"));
-    }
+
 }
