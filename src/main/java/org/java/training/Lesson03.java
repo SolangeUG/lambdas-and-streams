@@ -1,8 +1,12 @@
 package org.java.training;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Better understanding of the differences in performance
@@ -12,6 +16,24 @@ import java.util.function.Supplier;
  * @author Stuart Marks
  */
 public class Lesson03 {
+
+    /**
+     * Main entry point for application
+     *
+     * @param args the command line arguments
+     * @throws IOException If word file cannot be read
+     * @throws URISyntaxException if the word file URI is incorrect
+     */
+    public static void main(String[] args) throws IOException, URISyntaxException {
+        RandomWords fullWordList = new RandomWords();
+        List<String> wordList = fullWordList.createList(200000);
+
+        measure("Sequential", () -> computeLevenshtein(wordList, false));
+        measure("Parallel", () -> computeLevenshtein(wordList, true));
+
+        measure("Sequential", () -> processWords(wordList, false));
+        measure("Parallel", () -> processWords(wordList, true));
+    }
 
     /* How many times to repeat the test.  5 seems to give reasonable results */
     private static final int RUN_COUNT = 5;
@@ -23,9 +45,9 @@ public class Lesson03 {
      * @param <T> The type of the result provided by the Supplier
      * @param label Description of what's being measured
      * @param supplier The Supplier to measure execution time of
-     * @return
+     * @return the result T
      */
-    static <T> T measureOneRun(String label, Supplier<T> supplier) {
+    private static <T> T measureOneRun(String label, Supplier<T> supplier) {
         long startTime = System.nanoTime();
         T result = supplier.get();
         long endTime = System.nanoTime();
@@ -62,11 +84,22 @@ public class Lesson03 {
      * @param parallel Whether to run in parallel
      * @return Matrix of Levenshtein distances
      */
-    static int[][] computeLevenshtein(List<String> wordList, boolean parallel) {
+    private static int[][] computeLevenshtein(List<String> wordList, boolean parallel) {
         final int LIST_SIZE = wordList.size();
         int[][] distances = new int[LIST_SIZE][LIST_SIZE];
 
         // YOUR CODE HERE
+        IntStream stream = IntStream.range(0, LIST_SIZE);
+
+        if (parallel) {
+            stream = stream.parallel();
+        }
+
+        stream.forEach(i -> {
+            for (int j = 0; j < LIST_SIZE; j++) {
+                distances[i][j] = Levenshtein.lev(wordList.get(i), wordList.get(j));
+            }
+        });
 
         return distances;
     }
@@ -78,26 +111,20 @@ public class Lesson03 {
      * @param parallel Whether to run in parallel
      * @return The list processed in whatever way you want
      */
-    static List<String> processWords(List<String> wordList, boolean parallel) {
+    private static List<String> processWords(List<String> wordList, boolean parallel) {
+
         // YOUR CODE HERE
+        Stream<String> stream;
 
-        return null;
-    }
+        if (parallel) {
+            stream = wordList.parallelStream();
+        } else {
+            stream = wordList.stream();
+        }
 
-    /**
-     * Main entry point for application
-     *
-     * @param args the command line arguments
-     * @throws IOException If word file cannot be read
-     */
-    public static void main(String[] args) throws IOException {
-        RandomWords fullWordList = new RandomWords();
-        List<String> wordList = fullWordList.createList(1000);
-
-        measure("Sequential", () -> computeLevenshtein(wordList, false));
-        measure("Parallel", () -> computeLevenshtein(wordList, true));
-
-//    measure("Sequential", () -> processWords(wordList, false));
-//    measure("Parallel", () -> processWords(wordList, true));
+        return stream.map(String::toLowerCase)
+                .sorted()
+                .distinct()
+                .collect(Collectors.toList());
     }
 }
