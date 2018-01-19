@@ -3,15 +3,19 @@
 [![License MIT](https://img.shields.io/badge/license-MIT%20License-green.svg)](https://github.com/SolangeUG/fundamentals/blob/master/LICENSE)
 [![Platform Java](https://img.shields.io/badge/platform-Java-blue.svg)](https://docs.oracle.com/en/java/)
 
+This project is part of Oracle's introduction to Lambda Expressions and the Streams API course.
+Its focus is to familiarize the experienced Java software engineer with functional programming in Java.
 
 ## Languages - Libraries - Tools
 
-
-
+- Java SE 8 - any version, but the latest is always the best idea.
+- Maven - the latest release and recommended version.
+- Any IDE that supports JDK 8
 
 ## Requirements
 
-
+- [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- [Maven](https://maven.apache.org/download.cgi)
 
 
 ## Resources
