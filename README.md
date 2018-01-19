@@ -25,7 +25,7 @@
 [The MIT License (MIT)](https://opensource.org/licenses/MIT)
 
 ````
-Copyright (c) 2017 2017 Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2016 Oracle and/or its affiliates. All rights reserved.
 Copyright (c) 2018 Solange Umuhire Gasengayire
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
