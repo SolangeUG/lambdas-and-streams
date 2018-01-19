@@ -8,14 +8,14 @@ Its focus is to familiarize the experienced Java software engineer with function
 
 ## Languages - Libraries - Tools
 
-- Java SE 8 - any version, but the latest is always the best idea.
-- Maven - the latest release and recommended version.
+- [Java SE 8](https://docs.oracle.com/javase/8/docs/)
+- [Maven](https://maven.apache.org/what-is-maven.html)
 - Any IDE that supports JDK 8
 
 ## Requirements
 
-- [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-- [Maven](https://maven.apache.org/download.cgi)
+- [JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)  - any version, but the latest is always the best idea.
+- [Maven](https://maven.apache.org/download.cgi) - the latest release and recommended version.
 
 
 ## Resources
